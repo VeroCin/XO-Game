@@ -44,7 +44,6 @@ function handleCellClick(event) {
     }
     gameState[index] = currentPlayer;
     cell.textContent = currentPlayer;
-    cell.classList.add('taken');
     const winner = checkWinner();
     if (winner) {
         endGame(winner);
