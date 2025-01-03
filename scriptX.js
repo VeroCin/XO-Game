@@ -17,7 +17,11 @@ function createBoard() {
 }
 
 function switchPlayer() {
-    currentPlayer = currentPlayer === 'X' ? '0' : 'X';
+    if (currentPlayer === 'X') {
+        currentPlayer = '0';
+    } else {
+        currentPlayer = 'X';
+    }
     message.textContent = `It is turn ${currentPlayer}`;
 }
 
