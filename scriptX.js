@@ -25,19 +25,49 @@ function switchPlayer() {
     message.textContent = `It is turn ${currentPlayer}`;
 }
 
+function generateWinningCombinations() {
+    const combinations = [];
+    for (let i = 0; i < 9; i += 3) {
+        const row = [];
+        for (let j = 0; j < 3; j++) {
+            row.push(i + j);
+        }
+        combinations.push(row);
+    }
+    for (let i = 0; i < 3; i++) {
+        const column = [];
+        for (let j = 0; j < 3; j++) {
+            column.push(i + j * 3);
+        }
+        combinations.push(column);
+    }
+    const diagonal1 = [];
+    for (let i = 0; i < 9; i += 4) {
+        diagonal1.push(i);
+    }
+    combinations.push(diagonal1);
+    const diagonal2 = [];
+    for (let i = 2; i < 7; i += 2) {
+        diagonal2.push(i);
+    }
+    combinations.push(diagonal2);
+    return combinations;
+}
+const winningCombinations = generateWinningCombinations();
+
 function checkWinner() {
-    const winningCombinations = [
-        [0, 1, 2], [3, 4, 5], [6, 7, 8],
-        [0, 3, 6], [1, 4, 7], [2, 5, 8], 
-        [0, 4, 8], [2, 4, 6]             
-    ];
     for (const combination of winningCombinations) {
         const [a, b, c] = combination;
         if (gameState[a] && gameState[a] === gameState[b] && gameState[a] === gameState[c]) {
             return gameState[a];
         }
     }
-    return gameState.includes(null) ? null : 'Draw';
+    for (let i = 0; i < gameState.length; i++) {
+        if (gameState[i] === null) {
+            return null;
+        }
+    }
+    return 'Draw';
 }
 
 function handleCellClick(event) {
