@@ -28,31 +28,16 @@ function switchPlayer() {
 function generateWinningCombinations() {
     const combinations = [];
     for (let i = 0; i < 9; i += 3) {
-        const row = [];
-        for (let j = 0; j < 3; j++) {
-            row.push(i + j);
-        }
-        combinations.push(row);
+        combinations.push([i, i + 1, i + 2]);
     }
-    for (let i = 0; i < 3; i++) {
-        const column = [];
-        for (let j = 0; j < 3; j++) {
-            column.push(i + j * 3);
-        }
-        combinations.push(column);
+    for (let i = 0; i < 3; ++i) {
+        combinations.push([i, i + 3, i + 6]);
     }
-    const diagonal1 = [];
-    for (let i = 0; i < 9; i += 4) {
-        diagonal1.push(i);
-    }
-    combinations.push(diagonal1);
-    const diagonal2 = [];
-    for (let i = 2; i < 7; i += 2) {
-        diagonal2.push(i);
-    }
-    combinations.push(diagonal2);
+    combinations.push([0, 4, 8]);
+    combinations.push([2, 4, 6]);
     return combinations;
 }
+
 const winningCombinations = generateWinningCombinations();
 
 function checkWinner() {
@@ -62,7 +47,7 @@ function checkWinner() {
             return gameState[a];
         }
     }
-    for (let i = 0; i < gameState.length; i++) {
+    for (let i = 0; i < gameState.length; ++i) {
         if (gameState[i] === null) {
             return null;
         }
