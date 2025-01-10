@@ -84,7 +84,7 @@ function resetGame() {
     gameState = Array(9).fill(null);
     currentPlayer = 'X';
     gameActive = true;
-    message.textContent = 'It is player X  turn.';
+    message.textContent = 'It is player X turn.';
     message.className = 'alert alert-info';
     createBoard();
 }
